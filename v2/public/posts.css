@@ -1,0 +1,29 @@
+.posts a{
+    color: black !important;
+    text-decoration: none !important;
+}
+
+.post_card{
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    padding:19px;
+    margin-bottom: 20px;
+
+}
+
+.post_card li{
+    display: inline;
+}
+.topbar
+{
+    margin-bottom: 20px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.comment_card{
+    margin:20px;
+}

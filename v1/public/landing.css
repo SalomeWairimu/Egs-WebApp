@@ -1,0 +1,166 @@
+body{
+    /* margin: 20px; */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas:
+        "a b";
+    min-height: 100vh;
+    background-color: #bce9da !important;
+}
+
+#signup
+{
+    grid-area: a;
+    align-items: center;
+    background-color: #3b3e52;
+    color: white;
+    display: None;
+}
+
+#login
+{
+    grid-area: b;
+    align-items: center;
+    background-color: #3b3e52;
+    color: white;
+}
+
+
+.form_input
+{
+    display: block;
+    width:70%;
+    box-shadow: none;
+    background-color:#3b3e52;
+    outline:none;
+    border:none;
+    border-bottom: 2px solid #bce9da;
+}
+
+#signup .inner
+{
+    width:70%;
+    margin: 0 auto;
+    line-height: 1.2;
+}
+
+#login .inner
+{
+    width:70%;
+    margin: 0 auto;
+    line-height: 1.2;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+input:focus
+{
+    color:#8488a6;
+}
+::placeholder {
+    color:#8488a6;
+}
+#topbtn button
+{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.form_section
+{
+    padding-top: 10px;
+}
+
+.inner h2
+{
+    width:50%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.submit_btn
+{
+    margin-top: 30px;
+    margin-left: 30px;
+    border-radius: 25px !important;
+    background-color: #63d5c3 !important;
+    color: white !important;
+}
+
+#topbtn1
+{
+    margin: 20px;
+
+}
+
+#btn1
+{
+    margin-right: -2px !important;
+    border-top-left-radius: 25px !important;
+    border-bottom-left-radius: 25px !important;
+    border: None;
+    background-color: #63d5c3 !important;
+    color: white !important;
+}
+#btn2
+{
+    margin-left: -2px !important;
+    border-top-right-radius: 25px !important;
+    border: None;
+    border-bottom-right-radius: 25px !important;
+    background-color: #505470 !important;
+    color: #8488a6 !important;
+}
+
+#topbtn2
+{
+    float: right;
+    margin: 20px;
+
+}
+
+#btn3
+{
+    margin-right: -2px !important;
+    border-top-left-radius: 25px !important;
+    border-bottom-left-radius: 25px !important;
+    border: None;
+    background-color: #505470 !important;
+    color: #8488a6 !important;
+}
+#btn4
+{
+    margin-left: -2px !important;
+    border-top-right-radius: 25px !important;
+    border: None;
+    border-bottom-right-radius: 25px !important;
+    background-color: #63d5c3 !important;
+    color: white !important;
+}
+
+a{
+    color: inherit !important; /* blue colors for links too */
+    text-decoration: inherit;
+}
+
+@media (max-width: 860px) {
+    body {
+       display: grid;
+       grid-template-columns: 1fr;
+       grid-template-rows:1fr;
+       grid-template-areas: 
+          "c"; 
+       min-height: 100vh;
+ }
+ #login
+ {
+    grid-area: c;
+    display: None;
+ }
+ #signup
+ {
+    grid-area: c;
+    display: Block;
+ }
+}

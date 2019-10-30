@@ -1,0 +1,71 @@
+<% include ../partials/header %>
+        <div class= "main">
+            <div class="sidebar">
+                <input type="text" placeholder="Search by username" onkeyup="SearchBar()" id="search_val" style="margin-bottom: 5px">
+                <p style="margin-bottom: 0px; margin-top: 10px">Filter by Graduation Year</p>
+                <% years.forEach(function(year){ %>
+                    <input class="checkbox" onclick="getCheckedBoxes()" type="checkbox" value=<%=year%>><%=year%><br>
+                <% }); %>
+            </div>
+            <div class="scholars">
+                <% scholars.forEach(function(scholar){ %>
+                <article class="scholar_card">
+                    <section>
+                        <figure class="thumbnail">
+                            <a href="/scholars/<%= scholar._id %>">
+                                <img src="account.png">
+                                <h3 class="username"><%= scholar.firstname %> <%= scholar.lastname %></h3>
+                                <p><%= scholar.school %></p>
+                                <p class="grad">Grad Year: <%= scholar.grad_year %></p>
+                                <p><%= scholar.major %></p>
+                            </a>
+                        </figure>
+                    </section>
+                </article>
+                <% }); %>
+             </div>
+        </div>
+        <script>
+            function SearchBar() {
+                input = document.getElementById('search_val').value.toLowerCase();
+                users = document.getElementsByClassName("scholar_card");
+                for (var i = 0; i<users.length; i++)
+                {
+                    var uname = users[i].getElementsByClassName("username");
+                    var txtValue = uname[0].innerHTML.toLowerCase();
+                    if (txtValue.indexOf(input) > -1) {
+                        users[i].style.display = "";
+                    } else {
+                        users[i].style.display = "none";
+                    }
+                }
+            }
+            function getCheckedBoxes(chkboxName){
+                var checkboxes = document.getElementsByClassName("checkbox");
+                var years = []
+                for (var i = 0; i<checkboxes.length; i++){
+                    if (checkboxes[i].checked)
+                    {
+                        years.push(Number(checkboxes[i].value));
+                    }
+                }
+                var noneChecked = false;
+                if (years.length == 0)
+                {
+                    noneChecked = true;
+                }
+                users = document.getElementsByClassName("scholar_card");
+                for (var i = 0; i<users.length; i++)
+                {
+                    var grad = users[i].getElementsByClassName("grad");
+                    var txtValue = Number(grad[0].innerHTML.substring(11,15));
+                    if (years.includes(txtValue) || noneChecked) {
+                        users[i].style.display = "";
+                    } else {
+                        users[i].style.display = "none";
+                    }
+                }
+            }
+
+        </script>
+<% include ../partials/footer %>

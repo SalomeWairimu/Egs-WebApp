@@ -1,0 +1,17 @@
+<% include ../partials/header %>
+<div>
+    <a class="btn btn-primary btn-large" href="/internships/new">Add Experience</a>
+</div>
+<div class="row text-center" style="display:flex; flex-wrap: wrap;">
+    <% internships.forEach(function(internship){ %>
+        <div class="col-md-3 col-sm-6">
+            <h2><%= internship.company %></h2>
+            <h4><%= internship.author.firstname %> <%= internship.author.lastname %></h4>
+            <p><%= internship.type %></p>
+            <p>
+                <a href="/internships/<%= internship._id %>" class="btn btn-primary">More Info</a>
+            </p>
+        </div>
+    <% }); %>
+</div>
+<% include ../partials/footer %>

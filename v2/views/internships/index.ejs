@@ -1,0 +1,55 @@
+<% include ../partials/header %>
+<div class= "container">
+            <div class="topbar">
+                <a class="btn btn-success btn-sm" href="/internships/new">Add Experience</a>
+                <div class="search_btns">
+                    <input type="text" placeholder="Search by organization" onkeyup="SearchByOrg()" id="org_search">
+                    <input type="text" placeholder="Search by scholar" onkeyup="SearchByScholar()" id="scholar_search">
+                </div>
+            </div>
+            <div class="scholars">
+                <% internships.forEach(function(internship){ %>
+                <article class="scholar_card exp">
+                    <section>
+                        <figure class="thumbnail">
+                            <a href="/internships/<%= internship._id %>">
+                                <img src="company.png">
+                                <h2 class="org_name"><%= internship.company %></h2>
+                                <h3 class="scholar_name"><%= internship.author.firstname %> <%= internship.author.lastname %></h3>
+                                <p><%= internship.type %>: <%= internship.position %></p>
+                            </a>
+                        </figure>
+                    </section>
+                </article>
+                <% }); %>
+             </div>
+        </div>
+        <script>
+            function SearchByOrg(){
+                input = document.getElementById('org_search').value.toLowerCase();
+                exps = document.getElementsByClassName("exp");
+                for (var i = 0; i < exps.length; i++)
+                {
+                    var title = exps[i].getElementsByClassName("org_name")[0].innerHTML.toLowerCase();
+                    if (title.indexOf(input) > -1) {
+                        exps[i].style.display = "";
+                    } else {
+                        exps[i].style.display = "none";
+                    }
+                }
+            }
+            function SearchByScholar(){
+                input = document.getElementById('scholar_search').value.toLowerCase();
+                exps = document.getElementsByClassName("exp");
+                for (var i = 0; i < exps.length; i++)
+                {
+                    var title = exps[i].getElementsByClassName("scholar_name")[0].innerHTML.toLowerCase();
+                    if (title.indexOf(input) > -1) {
+                        exps[i].style.display = "";
+                    } else {
+                        exps[i].style.display = "none";
+                    }
+                }
+            }
+        </script>
+<% include ../partials/footer %>

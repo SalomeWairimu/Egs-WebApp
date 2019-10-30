@@ -1,0 +1,43 @@
+.navbar{
+    background-color: #3b3e52 !important;
+}
+.navbar a
+{
+    text-decoration: none;
+    color: rgb(255, 255, 255) !important;
+}
+
+#menu_button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    color: white !important;
+}
+.carousel_wrapper{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.carousel
+{
+    width:50%;
+    margin-bottom: 50px !important;
+}
+.name{
+    font-family: MarkForMC,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    font-size: 50px;
+    color: #3b3e52;
+    text-align: center;
+    padding: 50px !important;
+}
+#about_container{
+    background-color: #f2f2f2;
+    height:100% !important;
+}
+.about_inner{
+        background-color: #f2f2f2;
+    margin-top: 0;
+    padding-left: 50px !important;
+    padding-right: 50px !important;
+}

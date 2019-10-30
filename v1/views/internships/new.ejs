@@ -1,0 +1,44 @@
+<% include ../partials/header %>
+<div class="container">
+    <div class="row">
+        <h1 style="text-align: center">Add new career experience</h1>
+        <div style="width: 30%; margin: 25px auto;">
+            <form action="/internships" method="POST">
+                <div class="form-group">
+                    <label>Company/Organization name</label>
+                    <input class="form-control" type="text" name="company">
+                </div>
+                <div class="form-group">
+                    <label>Type of Experience</label>
+                    <input class="form-control" type="text" name="type">
+                </div>
+                <div class="form-group">
+                    <label>Start Date</label>
+                    <input class="form-control" type="date" name="startdate">
+                </div>
+                <div class="form-group">
+                    <label>End Date</label>
+                    <input class="form-control" type="date" name="enddate">
+                </div>
+                <div class="form-group">
+                    <label>Review</label>
+                    <input class="form-control" type="text" name="review">
+                </div>
+                <div class="form-group">
+                    <label>Advice to scholars</label>
+                    <input class="form-control" type="text" name="advice">
+                </div>
+                <div class="form-group">
+                    <label>Email address if want scholars to reach out</label>
+                    <input class="form-control" type="text" name="contact">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block">Submit!</button>
+                </div>
+            </form>
+            <a href="/internships">Go Back</a>
+        </div>
+    </div>
+</div>
+<% include ../partials/footer %>
+

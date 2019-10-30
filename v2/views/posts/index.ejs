@@ -1,0 +1,92 @@
+<% include ../partials/header %>
+<div class="container">
+            <div class="topbar">
+                <a class="btn btn-success btn-sm" href="#" data-toggle="modal" data-target="#addPostForm">New Post</a>
+                <div class="search_btns">
+                    <input type="text" placeholder="Search by post title" onkeyup="SearchByTitle()" id="title_search">
+                    <input type="text" placeholder="Search by author" onkeyup="SearchByAuthor()" id="author_search">
+                </div>
+            </div>
+            <div class="posts">
+                <% posts.forEach(function(post){ %>
+                <article class="post_card">
+                    <section>
+                        <a href="/posts/<%= post._id %>">
+                            <h2 class="post_title"><%= post.title %></h2>
+                            <p class="username">By <%= post.author.firstname %> <%= post.author.lastname %></p>
+                            <p><%= post.body.substring(0,600); %></p>
+                            <ul>
+                                <li>|</li>
+                                <li><%= post.time %></li>
+                                <li>|</li>
+                                <li><%= post.comments.length %> comments</li>
+                                <li>|</li>
+                            </ul>
+                        </a>
+                    </section>
+                </article>
+                <% }); %>
+            </div>
+        <div class="modal fade" id="addPostForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold">New Post</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body mx-3">
+                <div class="md-form mb-5">
+                  <i class="fas fa-user prefix grey-text"></i>
+                  <form action="/posts" method="POST">
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="title" placeholder="title">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="body" placeholder="body">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-lg btn-primary btn-block">Submit!</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <script>
+            console.log(moment().format())
+            function SearchByTitle(){
+                input = document.getElementById('title_search').value.toLowerCase();
+                posts = document.getElementsByClassName("post_card");
+                for (var i = 0; i < posts.length; i++)
+                {
+                    var title = posts[i].getElementsByClassName("post_title")[0].innerHTML.toLowerCase();
+                    if (title.indexOf(input) > -1) {
+                        console.log("yes");
+                        posts[i].style.display = "";
+                    } else {
+                        console.log("no");
+                        posts[i].style.display = "none";
+                    }
+                }
+            }
+            function SearchByAuthor(){
+                input = document.getElementById('author_search').value.toLowerCase();
+                posts = document.getElementsByClassName("post_card");
+                for (var i = 0; i < posts.length; i++)
+                {
+                    var title = posts[i].getElementsByClassName("username")[0].innerHTML.toLowerCase();
+                    if (title.indexOf(input) > -1) {
+                        console.log("yes");
+                        posts[i].style.display = "";
+                    } else {
+                        console.log("no");
+                        posts[i].style.display = "none";
+                    }
+                }
+            }
+        </script>
+<% include ../partials/footer %>
