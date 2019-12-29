@@ -32,6 +32,7 @@ mongoose.connect("mongodb+srv://egs:Egs2019@cluster0-lgdws.mongodb.net/test?retr
         console.log(err.message)
     });
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 app.use(expressSanitizer());
 app.set("view engine", "ejs");
 app.use(express.static("public"));
@@ -59,6 +60,13 @@ app.use(function(req, res, next){
     next();
 });
 
+app.use(function(req, res, next) {
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+	res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+	next();
+});
+
 //routes
 app.use(indexRoutes);
 app.use("/posts", postRoutes);
@@ -67,6 +75,6 @@ app.use("/posts/:id/comments",commentRoutes);
 app.use("/internships", internshipRoutes);
 
 
-app.listen(3000, process.env.IP, function(){
+app.listen(5000, process.env.IP, function(){
    console.log("The egs v2 Started!");
 });
