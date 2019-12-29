@@ -7,15 +7,13 @@ var moment = require('moment');
 
 // add middleware
 // posts routes
-router.get("/", function(req, res) {
+router.get("/", middleware.isLoggedIn, function(req, res) {
         // Get all posts from DB
     Post.find({}, function(err, allPosts){
       if(err){
-          return res.status(404).send({ error:err});
+          console.log(err);
       } else {
-          // res.render("posts/index",{posts:allPosts});
-		  // return res.json({ success: true, data: allPosts });
-		  return res.status(200).send(allPosts);
+          res.render("posts/index",{posts:allPosts});
       }
     });
 });
