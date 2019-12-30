@@ -44,7 +44,7 @@ button {
 	display: inline-block;
 }
 
-.home { 
+.home, .about, .exec{ 
     /* Set a specific height */
     min-height: 100vh; 
     background-attachment: fixed;
@@ -88,4 +88,37 @@ h1, h2, h5, h3, p, li {
 }
 footer{
 	background-color: #303F9F;
+}
+
+.img-center {
+    margin: 0 auto;
+    width: 200px;
+}
+
+.fa {
+    color:#303F9F;
+    padding: 10px;
+}
+
+.fa:hover {
+    color:#3F51B5;
+}
+
+.boardlinks {
+    padding-bottom: 30px;
+}
+small{
+	font-size: 65% !important;
+	font-weight: 400;
+	color: #777;
+	    line-height: 1;
+}
+.board{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+.member{
+	flex: 1;
+	flex-basis: 25%;
 }
