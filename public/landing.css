@@ -53,9 +53,9 @@ body{
 {
     margin-bottom: 20px;
 }
-.submit_btn{
+button{
     width:100% !important;
-    background-color: #333333 !important;
+    background-color: #303F9F !important;
     border-radius: 25px !important;
     color: #fff !important;
 }

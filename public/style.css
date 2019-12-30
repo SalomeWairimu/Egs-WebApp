@@ -1,10 +1,13 @@
+html, body{
+	min-height: 100vh;
+}
 .navbar{
-    background-color: #3b3e52 !important;
+    background-color: #303F9F !important;
 }
 .navbar a
 {
     text-decoration: none;
-    color: rgb(255, 255, 255) !important;
+    color: #FFFFFF !important;
 }
 
 #menu_button {
@@ -23,21 +26,66 @@
     width:50%;
     margin-bottom: 50px !important;
 }
-.name{
-    font-family: MarkForMC,Helvetica Neue,Helvetica,Arial,sans-serif;
-    font-weight: 700;
-    font-size: 50px;
-    color: #3b3e52;
+
+h1 {
+    padding-top:200px !important;
     text-align: center;
-    padding: 50px !important;
+    font-size: 5em !important;
+    color:#303F9F;
 }
-#about_container{
-    background-color: #f2f2f2;
-    height:100% !important;
+
+button {
+    background: #303F9F;
+    border-style:none;
+    border-radius:5px !important;
+    width:165px;
+	height: 50px;
+    position: relative;
+	display: inline-block;
 }
-.about_inner{
-        background-color: #f2f2f2;
-    margin-top: 0;
-    padding-left: 50px !important;
-    padding-right: 50px !important;
+
+.home { 
+    /* Set a specific height */
+    min-height: 100vh; 
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #ffffff;
+}
+#socialmedia{
+    margin: 30px;
+}
+
+#socialmedia .fa {
+    color:#e61d81;
+    padding: 10px;
+}
+
+#socialmedia .fa:hover {
+    color:#fc64ae;
+}
+
+h2 {
+    font-size:3em !important;
+    text-align: center;
+    position: relative;
+    padding-bottom: 20px;
+	color:#303F9F;
+}
+
+h5 {
+    margin-left:18%;
+    margin-right:18%;
+    font-size:1.4em !important;
+    text-align: center;
+    font-weight: 115;
+    padding-bottom: 20px;
+    }
+h1, h2, h5, h3, p, li {
+    font-family: 'Lato', sans-serif;
+    
+}
+footer{
+	background-color: #303F9F;
 }
