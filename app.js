@@ -13,7 +13,8 @@ var express = require("express"),
     Post = require("./models/post"),
     Comment = require("./models/comment"),
     Internship = require("./models/internship"),
-    moment = require('moment');
+    moment = require('moment'),
+	cloudinary = require('cloudinary').v2;
 
 // requiring routes
 var indexRoutes = require("./routes/index");
@@ -31,6 +32,14 @@ mongoose.connect("mongodb+srv://egs:Egs2019@cluster0-lgdws.mongodb.net/test?retr
     }).catch(err => {
         console.log(err.message)
     });
+
+// Cloudinary configure
+cloudinary.config({
+  cloud_name: 'dblsc50xq',
+  api_key: '287199383749553',
+  api_secret: 'n4rrKIYC-hmj_kL3EazFlIjw1Hs'
+});
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(expressSanitizer());

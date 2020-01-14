@@ -9,6 +9,7 @@ var UserSchema = new mongoose.Schema({
     grad_year: Number,
     major: String,
     password: String,
+	profile_url: String,
     posts: [
       {
          type: mongoose.Schema.Types.ObjectId,

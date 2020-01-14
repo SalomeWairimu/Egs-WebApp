@@ -93,6 +93,8 @@ footer{
 .img-center {
     margin: 0 auto;
     width: 200px;
+	height: 200px;
+	border-radius: 50%;
 }
 
 .fa {
@@ -113,12 +115,22 @@ small{
 	color: #777;
 	    line-height: 1;
 }
-.board{
+.board, .scholars{
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
 }
-.member{
+.member {
 	flex: 1;
 	flex-basis: 25%;
+}
+
+.scholar_card{
+	flex: 1;
+	flex-basis: 50%;
+}
+.scholar_card a
+{
+    text-decoration: none;
+    color: #212121 !important;
 }

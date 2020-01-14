@@ -1,5 +1,5 @@
 <% include ../partials/header %>
-        <div class= "main">
+        <div class= "scholar_page">
             <div class="sidebar">
                 <input type="text" placeholder="Search by username" onkeyup="SearchBar()" id="search_val" style="margin-bottom: 5px">
                 <p style="margin-bottom: 0px; margin-top: 10px">Filter by Graduation Year</p>
@@ -9,19 +9,22 @@
             </div>
             <div class="scholars">
                 <% scholars.forEach(function(scholar){ %>
-                <article class="scholar_card">
-                    <section>
-                        <figure class="thumbnail">
-                            <a href="/scholars/<%= scholar._id %>">
-                                <img src="account.png">
-                                <h3 class="username"><%= scholar.firstname %> <%= scholar.lastname %></h3>
-                                <p><%= scholar.school %></p>
-                                <p class="grad">Grad Year: <%= scholar.grad_year %></p>
-                                <p><%= scholar.major %></p>
-                            </a>
-                        </figure>
-                    </section>
-                </article>
+				<div class="scholar_card text-center">
+					<a href="/scholars/<%= scholar._id %>">
+					<%if(!scholar.profile_url) {%>
+					<!-- <img class="img-circle img-responsive img-center" src="https://www.searchpng.com/wp-content/uploads/2019/02/User-Icon-PNG.png"> -->
+						<img class="img-circle img-responsive img-center" src="images/profile/17.jpeg">
+					<% } else{ %>
+					<img class="img-circle img-responsive img-center" src=<%= scholar.profile_url %>>
+					<% }; %>
+	            <h3 class="username"><%= scholar.firstname %> <%= scholar.lastname %></h3>
+	            <p> <%= scholar.major %> </p>
+				<p> <%= scholar.school %></p>
+				<p class="grad">Grad Year: <%= scholar.grad_year %></p>
+	            <h3> <small> “What is something you are really proud of?” </small></h3>
+	            <p> “Over the summer, I worked for a startup called HotPlate in the Garage's Summer Wildfire Program. With another developer (shoutout to Laura!), I built a React Native mobile application from scratch. This was an amazing experience in which I became familiar with new technologies and learned how to work more efficiently on a team. I'm very proud to say that HotPlate is now on the app store!” </p>
+					</a>
+				</div>
                 <% }); %>
              </div>
         </div>
