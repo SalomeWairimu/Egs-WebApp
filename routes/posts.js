@@ -7,37 +7,36 @@ var moment = require('moment');
 
 // add middleware
 // posts routes
-router.get("/", middleware.isLoggedIn, function(req, res) {
+router.get("/", function(req, res) {
         // Get all posts from DB
     Post.find({}, function(err, allPosts){
       if(err){
-          console.log(err);
+          return res.json({ success: false, error: err });
       } else {
-          res.render("posts/index",{posts:allPosts});
+		  return res.json({ success: true, data: allPosts});
       }
     });
 });
 //CREATE - add new post to DB
-router.post("/", middleware.isLoggedIn,function(req, res){
+router.post("/", function(req, res){
+	console.log(req);
     User.findById(req.user._id, function(err, user){
         if(err){
-           console.log(err);
-           res.redirect("/posts");
+           return res.json({ success: false, error: err });
        } else {
             // get data from form and add to posts array
-            var author = {id: req.user._id, firstname:req.user.firstname, lastname: req.user.lastname};
+            var author = {id: user._id, firstname:user.firstname, lastname: user.lastname};
             var title = req.sanitize(req.body.title);
             var body = req.sanitize(req.body.body);
             var newPost = {author: author,title: title, body: body};
             // Create a new post and save to DB
             Post.create(newPost, function(err, newlyCreated){
                 if(err){
-                    console.log(err);
+                    return res.json({ success: false, error: err });
                 } else {
                     user.posts.push(newlyCreated);
                     user.save();
-                    //redirect back to posts page
-                    res.redirect("/posts");
+                    return res.json({ success: true, data: newlyCreated });
                 }
             });
        }
@@ -49,14 +48,13 @@ router.post("/", middleware.isLoggedIn,function(req, res){
 // });
 
 // SHOW - shows more info about one post
-router.get("/:id", middleware.isLoggedIn,function(req, res){
+router.get("/:id", function(req, res){
     //find the post with provided ID
     Post.findById(req.params.id).populate("comments").exec(function(err, foundPost){
         if(err){
-            console.log(err);
+            return res.json({ success: false, error: err });
         } else {
-            //render show template with that post
-            res.render("posts/show", {post: foundPost});
+			return res.json({ success: true, data: foundPost });
         }
     });
 });
@@ -77,7 +75,7 @@ router.get("/:id", middleware.isLoggedIn,function(req, res){
 // });
 
 // update
-router.put("/:id", middleware.checkPostOwnership, function(req,res)
+router.put("/:id", function(req,res)
 {
     var title = req.sanitize(req.body.title);
     var body = req.sanitize(req.body.body);
@@ -86,26 +84,26 @@ router.put("/:id", middleware.checkPostOwnership, function(req,res)
     {
         if (err)
         {
-            res.redirect("/posts");
+            return res.json({ success: false, error: err });
         }
         else
         {
-            res.redirect("/posts/"+req.params.id);
+            return res.json({ success: true, data: updatedPost });
         }
     });
 });
 //delete
-router.delete("/:id", middleware.checkPostOwnership, function(req,res)
+router.delete("/:id", function(req,res)
 {
     Post.findOneAndDelete({_id:req.params.id}, function(err)
     {
         if (err)
         {
-            res.redirect("/posts");
+            return res.json({ success: false, error: err });
         }
         else
         {
-            res.redirect("/posts");
+            return res.json({ success: true});
         }
     });
 });

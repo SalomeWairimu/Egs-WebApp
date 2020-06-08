@@ -5,23 +5,22 @@ var Internship = require("../models/internship");
 var middleware = require("../middleware");
 
 // posts routes
-router.get("/", middleware.isLoggedIn, function(req, res) {
+router.get("/", function(req, res) {
         // Get all posts from DB
     Internship.find({}, function(err, allInternships){
       if(err){
-          console.log(err);
+          return res.json({ success: false, error: err });
       } else {
-          res.render("internships/index",{internships:allInternships});
+		  return res.json({ success: true, data: allInternships});
       }
     });
 });
 
 //CREATE - add new post to DB
-router.post("/", middleware.isLoggedIn,function(req, res){
+router.post("/",function(req, res){
     User.findById(req.user._id, function(err, user){
         if(err){
-           console.log(err);
-           res.redirect("/internships");
+           return res.json({ success: false, error: err });
        } else {
             // get data from form and add to posts array
             var author = {id: req.user._id, firstname:req.user.firstname, lastname: req.user.lastname};
@@ -38,46 +37,44 @@ router.post("/", middleware.isLoggedIn,function(req, res){
             // Create a new post and save to DB
             Internship.create(newIntenship, function(err, newlyCreated){
                 if(err){
-                    console.log(err);
+                    return res.json({ success: false, error: err });
                 } else {
                     user.internships.push(newlyCreated);
                     user.save();
-                    //redirect back to posts page
-                    res.redirect("/internships");
+                    return res.json({ success: true, data: newlyCreated });
                 }
             });
        }
     });
 });
 //NEW - show form to create new post
-router.get("/new", middleware.isLoggedIn,function(req, res){
-  res.render("internships/new"); 
-});
+// router.get("/new", middleware.isLoggedIn,function(req, res){
+//   res.render("internships/new"); 
+// });
 
 // SHOW - shows more info about one post
 router.get("/:id", middleware.isLoggedIn,function(req, res){
     //find the post with provided ID
     Internship.findById(req.params.id).populate("comments").exec(function(err, foundInternship){
         if(err){
-            console.log(err);
+            return res.json({ success: false, error: err });
         } else {
-            //render show template with that post
-            res.render("internships/show", {internship: foundInternship});
+            return res.json({ success: true, data: foundInternship });
         }
     });
 });
 
 // edit posts
-router.get("/:id/edit", middleware.checkInternshipOwnership,function(req, res) {
+router.get("/:id/edit", function(req, res) {
     Internship.findById(req.params.id, function(err, foundinternship)
     {
         if (err)
         {
-            res.redirect("/internships");
+            return res.json({ success: false, error: err });
         }
         else
         {
-            res.render("internships/edit", {internship: foundinternship});
+			return res.json({ success: true, data: foundinternship });
         }
     });
 });
@@ -99,11 +96,11 @@ router.put("/:id", middleware.checkInternshipOwnership, function(req,res)
     {
         if (err)
         {
-            res.redirect("/internships");
+            return res.json({ success: false, error: err });
         }
         else
         {
-            res.redirect("/internships/"+req.params.id);
+            return res.json({ success: true, data: updatedIntenship });
         }
     });
 });
@@ -114,11 +111,11 @@ router.delete("/:id", middleware.checkInternshipOwnership, function(req,res)
     {
         if (err)
         {
-            res.redirect("/internships");
+            return res.json({ success: false, error: err });
         }
         else
         {
-            res.redirect("/internships");
+            return res.json({ success: true});
         }
     });
 });

@@ -6,23 +6,22 @@ var Comment = require("../models/comment");
 var middleware = require("../middleware");
 
 //Comments Create
-router.post("/", middleware.isLoggedIn, function(req, res){
+router.post("/", function(req, res){
    //lookup post using ID
    Post.findById(req.params.id, function(err, foundPost){
        if(err){
-           console.log(err);
-           res.redirect("/posts");
+           return res.json({ success: false, error: err });
        } else {
            var author = {id: req.user._id, firstname: req.user.firstname, lastname: req.user.lastname};
            var post = {id: foundPost._id, title: foundPost.title};
            var newComment = {author: author, post: post, body: req.sanitize(req.body.body)};
         Comment.create(newComment, function(err, comment){
            if(err){
-               res.redirect("/posts/"+foundPost._id);
+               return res.json({ success: false, error: err });
            } else {
                foundPost.comments.push(comment);
                foundPost.save();
-               res.redirect('/posts/' + foundPost._id);
+               return res.json({ success: true, data: comment });
            }
         });
        }
@@ -30,17 +29,17 @@ router.post("/", middleware.isLoggedIn, function(req, res){
 });
 
 //delete
-router.delete("/:comment_id", middleware.checkCommentOwnership, function(req,res)
+router.delete("/:comment_id", function(req,res)
 {
     Comment.findOneAndDelete({_id:req.params.comment_id}, function(err)
     {
         if (err)
         {
-            res.redirect("/posts/" + req.params.id);
+            return res.json({ success: false, error: err });
         }
         else
         {
-            res.redirect("/posts/" + req.params.id);
+            return res.json({ success: true});
         }
     });
 });
