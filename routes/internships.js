@@ -5,7 +5,7 @@ var Internship = require("../models/internship");
 var middleware = require("../middleware");
 
 // posts routes
-router.get("/", function(req, res) {
+router.get("/", middleware.isLoggedIn, function(req, res) {
         // Get all posts from DB
     Internship.find({}, function(err, allInternships){
       if(err){
@@ -17,7 +17,7 @@ router.get("/", function(req, res) {
 });
 
 //CREATE - add new post to DB
-router.post("/",function(req, res){
+router.post("/", middleware.isLoggedIn, function(req, res){
     User.findById(req.user._id, function(err, user){
         if(err){
            return res.json({ success: false, error: err });
@@ -65,7 +65,7 @@ router.get("/:id", middleware.isLoggedIn,function(req, res){
 });
 
 // edit posts
-router.get("/:id/edit", function(req, res) {
+router.get("/:id/edit", middleware.checkInternshipOwnership, function(req, res) {
     Internship.findById(req.params.id, function(err, foundinternship)
     {
         if (err)

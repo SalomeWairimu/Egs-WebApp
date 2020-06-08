@@ -7,7 +7,7 @@ var moment = require('moment');
 
 // add middleware
 // posts routes
-router.get("/", function(req, res) {
+router.get("/", middleware.isLoggedIn, function(req, res) {
         // Get all posts from DB
     Post.find({}, function(err, allPosts){
       if(err){
@@ -18,7 +18,7 @@ router.get("/", function(req, res) {
     });
 });
 //CREATE - add new post to DB
-router.post("/", function(req, res){
+router.post("/", middleware.isLoggedIn, function(req, res){
 	console.log(req);
     User.findById(req.user._id, function(err, user){
         if(err){
@@ -48,7 +48,7 @@ router.post("/", function(req, res){
 // });
 
 // SHOW - shows more info about one post
-router.get("/:id", function(req, res){
+router.get("/:id", middleware.isLoggedIn, function(req, res){
     //find the post with provided ID
     Post.findById(req.params.id).populate("comments").exec(function(err, foundPost){
         if(err){
@@ -75,7 +75,7 @@ router.get("/:id", function(req, res){
 // });
 
 // update
-router.put("/:id", function(req,res)
+router.put("/:id", middleware.checkPostOwnership, function(req,res)
 {
     var title = req.sanitize(req.body.title);
     var body = req.sanitize(req.body.body);
@@ -93,7 +93,7 @@ router.put("/:id", function(req,res)
     });
 });
 //delete
-router.delete("/:id", function(req,res)
+router.delete("/:id", middleware.checkPostOwnership, function(req,res)
 {
     Post.findOneAndDelete({_id:req.params.id}, function(err)
     {

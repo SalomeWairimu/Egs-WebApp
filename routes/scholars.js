@@ -3,7 +3,7 @@ var router  = express.Router();
 var User = require("../models/user");
 var middleware = require("../middleware");
 
-router.get("/", function(req, res) {
+router.get("/", middleware.isLoggedIn, function(req, res) {
     User.find({}, function(err, allUsers){
       if(err){
           return res.json({ success: false, error: err });
@@ -19,7 +19,7 @@ router.get("/", function(req, res) {
 });
 
 // SHOW - shows more info about one user
-router.get("/:id",function(req, res){
+router.get("/:id", middleware.isLoggedIn, function(req, res){
     //find the user with provided ID
     console.log(req.params.id);
     User.findById(req.params.id).populate("posts").exec(function(err, foundUser){

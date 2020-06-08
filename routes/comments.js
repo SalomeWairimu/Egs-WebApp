@@ -6,7 +6,7 @@ var Comment = require("../models/comment");
 var middleware = require("../middleware");
 
 //Comments Create
-router.post("/", function(req, res){
+router.post("/", middleware.isLoggedIn, function(req, res){
    //lookup post using ID
    Post.findById(req.params.id, function(err, foundPost){
        if(err){
@@ -29,7 +29,7 @@ router.post("/", function(req, res){
 });
 
 //delete
-router.delete("/:comment_id", function(req,res)
+router.delete("/:comment_id", middleware.checkCommentOwnership, function(req,res)
 {
     Comment.findOneAndDelete({_id:req.params.comment_id}, function(err)
     {
